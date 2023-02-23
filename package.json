@@ -1,0 +1,26 @@
+{
+  "name": "sode-e-pop",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "node-dev": "8.0.0",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "10.9.1",
+    "typed-factorio": "1.13.0",
+    "typescript": "4.9.5",
+    "typescript-to-lua": "^1.13.1"
+  },
+  "scripts": {
+    "build": "tstl",
+    "build:watch": "tstl --watch",
+    "clean:install": "node scripts/clean.js",
+    "copy:install": "node scripts/install.js",
+    "install": "run-s build clean:install copy:install",
+    "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run install'",
+    "prerelease": "rm -rf build && mkdir build",
+    "rel:bundle": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
+    "release": "run-s rel:bundle"
+  }
+}
