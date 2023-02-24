@@ -20,7 +20,7 @@
     "deploy": "run-s build deploy:clean deploy:copy",
     "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run install'",
     "prepackage": "rm -rf build && mkdir build",
-    "package": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua graphics sound locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
+    "package": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua graphics *.png sound locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
     "release": "run-s build package"
   }
 }
