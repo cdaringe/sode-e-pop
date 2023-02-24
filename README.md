@@ -1,7 +1,9 @@
 # sode-e-pop
 
-Adds delicious pop/soda to factorio!
+![](./graphics/icons/technology.png)
 
-## usage
+Adds delicious pop/soda to factorio :gear:!
 
-tbd
+- Research some delicious root beer
+- Craft the pop recipe using wood (it's kind of rooty), water, and empty barrels
+- Drink pop to get jacked up, for a minor health boost and a temporary increase in speed
