@@ -19,8 +19,8 @@
     "copy:install": "node scripts/install.js",
     "install": "run-s build clean:install copy:install",
     "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run install'",
-    "prerelease": "rm -rf build && mkdir build",
-    "rel:bundle": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
-    "release": "run-s rel:bundle"
+    "prepackage": "rm -rf build && mkdir build",
+    "package": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua graphics sound locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
+    "release": "run-s package"
   }
 }
