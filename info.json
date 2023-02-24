@@ -7,5 +7,5 @@
   "homepage": "https://github.com/cdaringe/sode-e-pop",
   "factorio_version": "1.1",
   "dependencies": ["base >= 1.1.0"],
-  "description": "Adds delicious soda pop (sode-e-pop) to the game!"
+  "description": "Adds delicious soda pop (sode-e-pop) to the game"
 }
