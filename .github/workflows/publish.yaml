@@ -23,7 +23,7 @@ jobs:
       - name: Install and Test
         run: |
           pnpm install
-          pnpm package
+          pnpm release
       - name: get mod_version
         id: mod_version
         uses: notiz-dev/github-action-json-property@release

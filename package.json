@@ -15,12 +15,12 @@
   "scripts": {
     "build": "tstl",
     "build:watch": "tstl --watch",
-    "clean:install": "node scripts/clean.js",
-    "copy:install": "node scripts/install.js",
-    "install": "run-s build clean:install copy:install",
+    "deploy:clean": "node scripts/clean.js",
+    "deploy:copy": "node scripts/install.js",
+    "deploy": "run-s build deploy:clean deploy:copy",
     "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run install'",
     "prepackage": "rm -rf build && mkdir build",
     "package": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua graphics sound locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
-    "release": "run-s package"
+    "release": "run-s build package"
   }
 }

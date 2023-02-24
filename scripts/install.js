@@ -9,6 +9,7 @@ const exclude = [
   "*.ts",
   "*.md",
   "tsconfig.json",
+  "build",
 ];
 
 console.log(
