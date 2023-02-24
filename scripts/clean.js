@@ -1,5 +1,21 @@
 const cp = require("child_process");
-const { pkg } = require("./common");
+const { localModsDirname, pkg } = require("./common");
+const fs = require("fs");
 
-cp.spawn("rm", ["-rf", `${pkg.name}*`], { stdio: "inherit" });
+const modBasenames = fs
+  .readdirSync(localModsDirname)
+  .filter((x) => x.includes(pkg.name));
+
+for (const basename of modBasenames) {
+  const params = [
+    "rm",
+    ["-rf", `${localModsDirname}/${basename}`],
+    {
+      stdio: "inherit",
+    },
+  ];
+
+  console.log(...params);
+  cp.spawn(...params);
+}
 console.log("cleaned.");

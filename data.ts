@@ -1,4 +1,5 @@
 import { Data, Mods } from "typed-factorio/data/types";
+import { DRINK_EVENT_EFFECT_ID } from "./lib/common";
 
 declare var data: Data;
 
@@ -58,6 +59,10 @@ data.extend([
                 {
                   type: "damage",
                   damage: { type: "physical", amount: -5 },
+                },
+                {
+                  type: "script",
+                  effect_id: DRINK_EVENT_EFFECT_ID,
                 },
                 {
                   type: "play-sound",

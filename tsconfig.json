@@ -6,9 +6,12 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["typed-factorio/runtime"]
+    "types": ["typed-factorio/runtime", "typed-factorio/strict-index-types"]
   },
   "tstl": {
-    "luaTarget": "JIT"
+    "luaTarget": "5.2",
+    "noImplicitSelf": true,
+    "noHeader": true,
+    "luaLibImport": "require-minimal"
   }
 }
