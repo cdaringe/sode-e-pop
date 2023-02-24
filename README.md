@@ -1,5 +1,7 @@
 # sode-e-pop
 
+[![Auto publish](https://github.com/cdaringe/sode-e-pop/actions/workflows/publish.yaml/badge.svg)](https://github.com/cdaringe/sode-e-pop/actions/workflows/publish.yaml)
+
 ![](./graphics/icons/technology.png)
 
 Adds delicious pop/soda to factorio :gear:!
