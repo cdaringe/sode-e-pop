@@ -96,5 +96,12 @@ data.extend([
       ["empty-barrel", 1],
     ],
     result: "sode-e-pop",
+    subgroup: "fluid-recipes",
+    crafting_machine_tint: {
+      primary: { r: 0.8, g: 0.958, b: 0.0, a: 0.8 },
+      secondary: { r: 0.8, g: 0.2, b: 0.172, a: 0.8 },
+      tertiary: { r: 0.876, g: 0.869, b: 0.597, a: 0.8 },
+      quaternary: { r: 0.6, g: 0.8, b: 0.019, a: 0.8 },
+    },
   },
 ]);
