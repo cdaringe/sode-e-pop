@@ -12,15 +12,13 @@ const exclude = [
   "build",
 ];
 
-console.log(
-  cp
-    .execSync(
-      `rsync -r --exclude node_modules ${exclude
-        .map((e) => `--exclude '${e}'`)
-        .join(" ")} ./ ${common.localModDirname}`
-    )
-    .toString()
-);
+const cmd = `rsync -r --exclude node_modules ${exclude
+  .map((e) => `--exclude '${e}'`)
+  .join(" ")} ./ "${common.localModDirname}"`;
 
-console.log(`tree: ${common.localModDirname}`);
-console.log(cp.execSync(`tree ${common.localModDirname}`).toString());
+console.log(`> ${cmd}`);
+console.log(cp.execSync(cmd).toString());
+
+const treeCmd = `tree "${common.localModDirname}"`;
+console.log(treeCmd);
+console.log(cp.execSync(treeCmd).toString());
