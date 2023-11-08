@@ -1,7 +1,12 @@
-import { Data, Mods } from "typed-factorio/data/types";
 import { DRINK_EVENT_EFFECT_ID } from "./lib/common";
+import {
+  TechnologyPrototype,
+  CapsulePrototype,
+  RecipePrototype,
+} from "factorio:prototype";
+import { PrototypeData, ActiveMods } from "factorio:common";
 
-declare var data: Data;
+declare const data: PrototypeData;
 
 const modBaseDirname = "__sode-e-pop__";
 
@@ -31,7 +36,7 @@ data.extend([
       ingredients: [["automation-science-pack", 1]],
       time: 15,
     },
-  },
+  } satisfies TechnologyPrototype,
 
   {
     type: "capsule",
@@ -82,7 +87,7 @@ data.extend([
     },
     order: "h[sode-e-pop]",
     stack_size: 100,
-  },
+  } satisfies CapsulePrototype,
 
   {
     type: "recipe",
@@ -103,5 +108,5 @@ data.extend([
       tertiary: { r: 0.876, g: 0.869, b: 0.597, a: 0.8 },
       quaternary: { r: 0.6, g: 0.8, b: 0.019, a: 0.8 },
     },
-  },
+  } satisfies RecipePrototype,
 ]);

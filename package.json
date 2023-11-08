@@ -1,17 +1,17 @@
 {
   "name": "sode-e-pop",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-    "fs-extra": "11.1.0",
-    "node-dev": "8.0.0",
+    "fs-extra": "^11.1.1",
+    "node-dev": "^8.0.0",
     "npm-run-all": "^4.1.5",
-    "ts-node": "10.9.1",
-    "typed-factorio": "1.13.0",
-    "typescript": "4.9.5",
-    "typescript-to-lua": "^1.13.1"
+    "ts-node": "^10.9.1",
+    "typed-factorio": "^2.4.1",
+    "typescript": "^5.2.2",
+    "typescript-to-lua": "^1.21.0"
   },
   "scripts": {
     "build": "tstl",
@@ -19,7 +19,7 @@
     "deploy:clean": "node scripts/clean.js",
     "deploy:copy": "node scripts/install.js",
     "deploy": "run-s build deploy:clean deploy:copy",
-    "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run install'",
+    "watch": "chokidar 'locale/**/*.cfg' '**/*.lua' '**/*.json' -c 'npm run deploy'",
     "prepackage": "rm -rf build && mkdir build",
     "package": "VERSION=$(cat info.json | jq -r .version) && RELEASE=sode-e-pop_$VERSION && rm -rf $RELEASE && mkdir -p $RELEASE && cp -r changelog.txt *.lua graphics *.png sound lib locale info.json $RELEASE && rm -rf build && mkdir -p build && zip -r build/$RELEASE.zip $RELEASE && rm -rf $RELEASE",
     "release": "run-s build package"

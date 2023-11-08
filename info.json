@@ -1,11 +1,11 @@
 {
   "name": "sode-e-pop",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "title": "sode-e-pop",
   "author": "cdaringe",
   "contact": "",
   "homepage": "https://github.com/cdaringe/sode-e-pop",
   "factorio_version": "1.1",
   "dependencies": ["base >= 1.1.0"],
-  "description": "Adds delicious soda pop (sode-e-pop) to the game"
+  "description": "Adds delicious soda pop (sode-e-pop) for a temporary speed boost"
 }

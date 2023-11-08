@@ -1,12 +1,13 @@
-import { Data, Mods } from "typed-factorio/settings/types";
+import { SettingsData } from "factorio:common";
+import { IntSettingDefinition } from "factorio:settings";
 
-declare var data: Data;
+declare const data: SettingsData;
 
-data.extend([
-  {
-    type: "int-setting",
-    name: "yoked-up-multiplier",
-    default_value: 2,
-    setting_type: "runtime-global",
-  },
-]);
+const setting: IntSettingDefinition = {
+  type: "int-setting",
+  name: "yoked-up-multiplier",
+  default_value: 2,
+  setting_type: "runtime-global",
+} satisfies IntSettingDefinition;
+
+data.extend([setting]);

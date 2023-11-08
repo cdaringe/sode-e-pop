@@ -1,4 +1,5 @@
 /** @noSelfInFile **/
+import { OnPlayerChangedPositionEvent } from "factorio:runtime";
 import { DRINK_EVENT_EFFECT_ID } from "./lib/common";
 const LOGGING_ENABLED = false;
 
