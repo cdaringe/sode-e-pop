@@ -4,8 +4,13 @@
 
 ![](./graphics/icons/technology.png)
 
-Adds delicious pop/soda to factorio :gear:!
+Adds delicious soda pop to factorio :gear:, giving a temporary speed boost.
 
-- Research some delicious root beer
-- Craft the pop recipe using wood (it's kind of rooty), water, and empty barrels
-- Drink pop to get jacked up, for a minor health boost and a temporary increase in speed
+Excellent quality of life addition for early and mid game, especially in sparse
+maps.
+
+## How it works
+
+- Research `sode-e-pop` recipe, so you can craft some delicious root beer
+- Build consumable cans of pop using wood, water, and empty barrels
+- Drink up to get jacked up, for a minor health boost and a temporary increase in speed
