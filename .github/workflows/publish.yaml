@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 18.14.2
       - name: Install pnpm
-        run: npm install -g pnpm@7
+        run: npm install -g pnpm@8
       - name: Install and Test
         run: |
           pnpm install
