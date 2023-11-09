@@ -4,6 +4,8 @@ import {
   CapsulePrototype,
   RecipePrototype,
   Sprite,
+  SpritePrototype,
+  AnimationPrototype,
 } from "factorio:prototype";
 import { AnyPrototype, PrototypeData } from "factorio:common";
 
@@ -106,16 +108,33 @@ const sodepopRecipe: RecipePrototype = {
   },
 };
 
-const staminaWheel: Sprite = {
-  filename: `${modBaseDirname}/graphics/entity/land-mine/land-mine-set-enemy.png`,
-  priority: "medium",
-  width: 32,
-  height: 32,
-};
+// export const staminaWheel: SpritePrototype = {
+//   type: "sprite",
+//   name: "stamina_wheel",
+//   filename: `${modBaseDirname}/graphics/sprite/stamina.png`,
+//   priority: "medium",
+//   width: 200,
+//   height: 200,
+//   generate_sdf: true,
+// };
+
+const staminaWheelFrames: SpritePrototype[] = [];
+let stamCount = 0;
+while (stamCount < 60) {
+  staminaWheelFrames.push({
+    type: "sprite",
+    name: `stamina_wheel_${stamCount}`,
+    filename: `${modBaseDirname}/graphics/sprite/stamina/stamina_${stamCount}.png`,
+    priority: "medium",
+    size: [32, 32],
+    generate_sdf: true,
+  } satisfies SpritePrototype);
+  ++stamCount;
+}
 
 data.extend([
   sodepopTechnology,
   sodepopConsumableCapsule,
   sodepopRecipe,
-  staminaWheel as AnyPrototype,
+  ...(staminaWheelFrames as AnyPrototype[]),
 ]);
