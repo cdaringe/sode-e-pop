@@ -1,5 +1,7 @@
 # sode-e-pop
 
+[![screen-shot](./docs/demo.png)](https://youtu.be/sQrxkDwoqSw)
+
 [![Auto publish](https://github.com/cdaringe/sode-e-pop/actions/workflows/publish.yaml/badge.svg)](https://github.com/cdaringe/sode-e-pop/actions/workflows/publish.yaml)
 
 ![](./graphics/icons/technology.png)
