@@ -38,25 +38,26 @@ const sodeBuffRange = sodeStartSpeedBuff - sodeEndSpeedBuff;
 const buffPerRemTick = sodeBuffRange / totalTicks;
 
 const drawStamWheel = (player: LuaPlayer, state: SodeState, tick: number) => {
-  // clear old state
-  const prevStaminaSpriteId = state.staminaSpriteId;
-  if (prevStaminaSpriteId) rendering.destroy(prevStaminaSpriteId);
+  try {
+    // clear old state
+    const prevStaminaSpriteId = state.staminaSpriteId;
+    if (prevStaminaSpriteId) rendering.destroy(prevStaminaSpriteId);
 
-  // load new state
-  const remainingTicks = state.endTick - tick;
-  const percentBuffApplied = (remainingTicks * buffPerRemTick) / sodeBuffRange;
-  const wheelIdx = 60 - Math.floor(60 * percentBuffApplied);
-  if (wheelIdx > maxStamFrameIdx) {
-    return;
-  }
-  state.staminaSpriteId = rendering.draw_sprite({
-    sprite: `stamina_wheel_${wheelIdx}`,
-    target: player.character!,
-    target_offset: STAMINA_OFFSET,
-    surface: player.surface,
-    // x_scale: STAMINA_SCALE,
-    // y_scale: STAMINA_SCALE,
-  });
+    // load new state
+    const remainingTicks = state.endTick - tick;
+    const percentBuffApplied =
+      (remainingTicks * buffPerRemTick) / sodeBuffRange;
+    const wheelIdx = 60 - Math.floor(60 * percentBuffApplied);
+    if (wheelIdx > maxStamFrameIdx) {
+      return;
+    }
+    state.staminaSpriteId = rendering.draw_sprite({
+      sprite: `stamina_wheel_${wheelIdx}`,
+      target: player.character!,
+      target_offset: STAMINA_OFFSET,
+      surface: player.surface,
+    });
+  } catch {}
 };
 
 const withState = (
@@ -149,3 +150,10 @@ script.on_event(defines.events.on_script_trigger_effect, function (event) {
     }
   }
 });
+script.on_event(defines.events.on_player_died, (evt) =>
+  withState(evt.player_index, (player, state) => {
+    try {
+      onBuffExpired(player, state);
+    } catch {}
+  })
+);
