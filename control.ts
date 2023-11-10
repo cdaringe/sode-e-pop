@@ -8,7 +8,7 @@ import {
 import { DRINK_EVENT_EFFECT_ID } from "./lib/common";
 import { color } from "util";
 
-const LOGGING_ENABLED = true;
+const LOGGING_ENABLED = false;
 const STAMINA_SCALE = 0.15;
 const STAMINA_OFFSET = [0, -2.1] as const;
 
