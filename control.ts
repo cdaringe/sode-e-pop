@@ -1,6 +1,7 @@
 /** @noSelfInFile **/
 import {
   LuaPlayer,
+  LuaRenderObject,
   OnPlayerChangedPositionEvent,
   OnTickEvent,
   PlayerIndex,
@@ -13,7 +14,7 @@ const STAMINA_SCALE = 0.15;
 const STAMINA_OFFSET = [0, -2.1] as const;
 
 interface SodeState {
-  staminaSpriteId?: number;
+  staminaSprite?: LuaRenderObject;
   lastPosition: { x: number; y: number };
   endTick: number;
 }
@@ -40,8 +41,8 @@ const buffPerRemTick = sodeBuffRange / totalTicks;
 const drawStamWheel = (player: LuaPlayer, state: SodeState, tick: number) => {
   try {
     // clear old state
-    const prevStaminaSpriteId = state.staminaSpriteId;
-    if (prevStaminaSpriteId) rendering.destroy(prevStaminaSpriteId);
+    const prevStaminaSprite = state.staminaSprite;
+    if (prevStaminaSprite) prevStaminaSprite.destroy();
 
     // load new state
     const remainingTicks = state.endTick - tick;
@@ -51,10 +52,13 @@ const drawStamWheel = (player: LuaPlayer, state: SodeState, tick: number) => {
     if (wheelIdx > maxStamFrameIdx) {
       return;
     }
-    state.staminaSpriteId = rendering.draw_sprite({
+    state.staminaSprite = rendering.draw_sprite({
       sprite: `stamina_wheel_${wheelIdx}`,
-      target: player.character!,
-      target_offset: STAMINA_OFFSET,
+      target: {
+        x: player.position.x + STAMINA_OFFSET[0],
+        y: player.position.y + STAMINA_OFFSET[1],
+      },
+      // target_offset: STAMINA_OFFSET,
       surface: player.surface,
     });
   } catch {}
@@ -77,7 +81,7 @@ const onPositionChange = (evt: OnPlayerChangedPositionEvent) =>
     try {
       const remainingTicks = playerState.endTick - game.tick;
       if (remainingTicks > 0) {
-        if (!playerState.staminaSpriteId) {
+        if (!playerState.staminaSprite) {
           drawStamWheel(player, playerState, evt.tick);
         }
         const next = sodeEndSpeedBuff + buffPerRemTick * remainingTicks;
@@ -97,8 +101,8 @@ const onPositionChange = (evt: OnPlayerChangedPositionEvent) =>
 
 const onBuffExpired = (player: LuaPlayer, playerState: SodeState) => {
   player.character_running_speed_modifier = 0;
-  if (playerState.staminaSpriteId) {
-    rendering.destroy(playerState.staminaSpriteId);
+  if (playerState.staminaSprite) {
+    playerState.staminaSprite.destroy();
   }
   delete global.sodeStateByPlayerIndex[player.index];
   log(player, "buff expired");

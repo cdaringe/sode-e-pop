@@ -21,7 +21,7 @@ const sodepopTechnology: TechnologyPrototype = {
   type: "technology",
   name: "sode-e-pop",
   icon_size: 256,
-  icon_mipmaps: 4,
+  // icon_mipmaps: 4,
   icon: sodaTechnologyFilename,
   effects: [
     {
@@ -41,7 +41,8 @@ const sodepopConsumableCapsule: CapsulePrototype = {
   name: "sode-e-pop",
   icon: sodaIconFilename,
   icon_size: 144,
-  icon_mipmaps: 4,
+  icons: [],
+  // icon_mipmaps: 4,
   subgroup: "raw-resource",
   capsule_action: {
     type: "use-on-self",
@@ -52,7 +53,6 @@ const sodepopConsumableCapsule: CapsulePrototype = {
       cooldown: 5,
       range: 0,
       ammo_type: {
-        category: "capsule",
         target_type: "position",
         action: {
           type: "direct",
@@ -96,9 +96,9 @@ const sodepopRecipe: RecipePrototype = {
   ingredients: [
     { type: "fluid", name: "water", amount: 100 },
     { type: "item", name: "wood", amount: 5 },
-    ["empty-barrel", 1],
+    { type: "item", name: "empty-barrel", amount: 1 }
   ],
-  result: "sode-e-pop",
+  results: [{ type: 'item', name: "sode-e-pop", amount: 1 }],
   subgroup: "fluid-recipes",
   crafting_machine_tint: {
     primary: { r: 0.8, g: 0.958, b: 0.0, a: 0.8 },
