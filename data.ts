@@ -41,7 +41,6 @@ const sodepopConsumableCapsule: CapsulePrototype = {
   name: "sode-e-pop",
   icon: sodaIconFilename,
   icon_size: 144,
-  icons: [],
   // icon_mipmaps: 4,
   subgroup: "raw-resource",
   capsule_action: {
@@ -96,7 +95,7 @@ const sodepopRecipe: RecipePrototype = {
   ingredients: [
     { type: "fluid", name: "water", amount: 100 },
     { type: "item", name: "wood", amount: 5 },
-    { type: "item", name: "empty-barrel", amount: 1 }
+    { type: "item", name: "barrel", amount: 1 }
   ],
   results: [{ type: 'item', name: "sode-e-pop", amount: 1 }],
   subgroup: "fluid-recipes",

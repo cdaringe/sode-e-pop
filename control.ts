@@ -18,11 +18,11 @@ interface SodeState {
   lastPosition: { x: number; y: number };
   endTick: number;
 }
-declare const global: {
+declare const storage: {
   sodeStateByPlayerIndex: Record<number, SodeState>;
 };
 
-global.sodeStateByPlayerIndex = {};
+storage.sodeStateByPlayerIndex = {};
 
 const log = (player: { print: (this: void, p: any) => void }, msg: any) => {
   if (LOGGING_ENABLED) {
@@ -70,7 +70,7 @@ const withState = (
 ) => {
   const player = game.get_player(idx);
   if (!player) return;
-  const sodeState = global.sodeStateByPlayerIndex;
+  const sodeState = storage.sodeStateByPlayerIndex;
   const playerState = sodeState?.[player.index];
   if (!playerState) return;
   fn(player, playerState);
@@ -104,7 +104,7 @@ const onBuffExpired = (player: LuaPlayer, playerState: SodeState) => {
   if (playerState.staminaSprite) {
     playerState.staminaSprite.destroy();
   }
-  delete global.sodeStateByPlayerIndex[player.index];
+  delete storage.sodeStateByPlayerIndex[player.index];
   log(player, "buff expired");
 };
 
@@ -122,7 +122,7 @@ const onPlayerTick = (
 };
 
 const onTick = (evt: OnTickEvent) => {
-  for (const id in global.sodeStateByPlayerIndex) {
+  for (const id in storage.sodeStateByPlayerIndex) {
     const player = game.get_player(id);
     if (!player) continue;
     withState(player.index, (p, s) => onPlayerTick(p, s, evt));
@@ -132,7 +132,7 @@ const onTick = (evt: OnTickEvent) => {
 script.on_event(defines.events.on_player_changed_position, onPositionChange);
 script.on_event(defines.events.on_tick, onTick);
 script.on_event(defines.events.on_player_left_game, (evt) => {
-  delete global.sodeStateByPlayerIndex[evt.player_index];
+  delete storage.sodeStateByPlayerIndex[evt.player_index];
 });
 script.on_event(defines.events.on_script_trigger_effect, function (event) {
   if (event.effect_id == DRINK_EVENT_EFFECT_ID) {
@@ -140,7 +140,7 @@ script.on_event(defines.events.on_script_trigger_effect, function (event) {
     if (index) {
       const player = game.get_player(index);
       if (!player) return;
-      const lastState = global.sodeStateByPlayerIndex[player.index];
+      const lastState = storage.sodeStateByPlayerIndex[player.index];
       if (lastState != null) onBuffExpired(player, lastState);
       const payload: SodeState = {
         endTick: event.tick + totalTicks,
@@ -148,8 +148,8 @@ script.on_event(defines.events.on_script_trigger_effect, function (event) {
       };
       log(player, payload);
 
-      global.sodeStateByPlayerIndex = global.sodeStateByPlayerIndex || {};
-      global.sodeStateByPlayerIndex[index] = payload;
+      storage.sodeStateByPlayerIndex = storage.sodeStateByPlayerIndex || {};
+      storage.sodeStateByPlayerIndex[index] = payload;
       player.character_running_speed_modifier = sodeStartSpeedBuff;
     }
   }
